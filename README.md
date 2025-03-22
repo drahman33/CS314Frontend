@@ -120,7 +120,7 @@ src/
 │   ├── apiClient.js
 │   └── socket.js
 tests/
-└── Flow.test.js   ← 30 backend tests here
+└── Flow.test.js 
 ```
 
 ---
