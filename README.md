@@ -1,70 +1,135 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 💬 Instant Messaging App (React + Socket.IO)
 
-## Available Scripts
+This is a full-stack instant messaging app featuring:
+
+- ✅ User Sign Up / Login
+- 🔎 Search for users by email
+- 💬 Send & receive messages (real-time)
+- 📌 Pinned chat history
+- ❌ Delete conversation
+- ✅ API testing with Jest + Supertest
+
+---
+
+## 🚀 Available Scripts
 
 In the project directory, you can run:
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Starts the **frontend development server**.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Opens [http://localhost:5173](http://localhost:5173)
+- Loads sign-up, login, and chat interfaces
+- Syncs with the backend via REST & Socket.IO
+
+You can change the port in your `.env` file if needed.
+
+---
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches the **test runner** with 30 total backend API tests:
+
+| Feature        | Tests |
+|----------------|-------|
+| Sign Up        |   6   |
+| Login          |   6   |
+| Find User      |   6   |
+| Send Chat      |   6   |
+| Delete Message |   6   |
+
+> ✅ Make sure your backend is running before testing!
+
+```bash
+npm test         # watch mode
+npx jest         # one-off test run
+```
+
+Customize the backend URL in `tests/Flow.test.js`:
+
+```js
+const BASE_URL = 'http://localhost:4000'; // or your ngrok/render URL
+```
+
+---
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Builds the app for production:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Outputs to `/build`
+- Optimized for speed and caching
+- Ready to deploy to Render / Netlify / Vercel
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
 ### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+> ⚠️ Only use if you want to customize Webpack, Babel, etc.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## ⚙️ Environment Config
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Create a `.env` file in your root:
 
-## Learn More
+```
+REACT_APP_SERVER_URL=https://your-backend-url
+PORT=5173
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🔐 Backend Requirements
 
-### Code Splitting
+This frontend expects the following endpoints:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+| Endpoint                            | Method |
+|-------------------------------------|--------|
+| /api/auth/signup                    | POST   |
+| /api/auth/login                     | POST   |
+| /api/auth/logout                    | POST   |
+| /api/auth/userinfo                  | GET    |
+| /api/contacts/search                | POST   |
+| /api/contacts/get-contacts-for-list| GET    |
+| /api/messages/send                  | POST   |
+| /api/messages/get-messages          | POST   |
+| /api/contacts/delete-dm/:id         | DELETE |
 
-### Analyzing the Bundle Size
+### Socket.IO Events
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- `sendMessage`
+- `receiveMessage`
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 📁 Folder Structure (Frontend)
 
-### Advanced Configuration
+```
+src/
+├── App.js
+├── App.css
+├── index.js
+├── pages/
+│   ├── LoginPage.js
+│   ├── SignupPage.js
+│   └── ChatPage.js
+├── services/
+│   ├── apiClient.js
+│   └── socket.js
+tests/
+└── Flow.test.js   ← 30 backend tests here
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+## 🧠 Learn More
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- [React Docs](https://reactjs.org/)
+- [Jest Testing](https://jestjs.io/)
+- [Socket.IO](https://socket.io/)
+- [Create React App](https://create-react-app.dev/)
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
